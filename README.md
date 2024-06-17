@@ -210,3 +210,70 @@ private void Button_Click(object sender, RoutedEventArgs e)
 
 
 
+
+
+
+
+
+
+
+
+   капчя
+
+int attempt = 0;
+attempt++;
+string allowchar;
+allowchar = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z";
+allowchar += "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,y,z";
+allowchar += "1,2,3,4,5,6,7,8,9,0";
+char[] a = { ',' };
+string[] ar = allowchar.Split(a);
+
+
+    
+string temp;
+Random r = new Random();
+
+
+for (int i = 0; i < 4; i++)
+{
+    temp = ar[(r.Next(0, ar.Length))];
+    pwd += temp;
+}
+
+
+
+
+штрих код
+
+string date_in_string = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString();
+MessageBox.Show(date_in_string);
+System.Drawing.Image image = null;
+//переменная для штрих-кода
+BarcodeLib.Barcode b = new BarcodeLib.Barcode();
+//Фон штрих-кода
+b.BackColor = System.Drawing.Color.White;
+//Цвет шрих-кода
+b.ForeColor = System.Drawing.Color.Black;
+//наличие текста на штрих-коде
+b.IncludeLabel = true;
+//Положение кода на картинке (слева, по центру, справа)
+b.Alignment = BarcodeLib.AlignmentPositions.CENTER;
+//Положение текста на картинке
+b.LabelPosition = BarcodeLib.LabelPositions.BOTTOMCENTER;
+//Формат изображения
+b.ImageFormat = System.Drawing.Imaging.ImageFormat.Jpeg;
+//Настройки шрифта
+System.Drawing.Font font = new System.Drawing.Font("verdana", 10f);
+b.LabelFont = font;
+//Настройка высоты изображения (в пикселях)
+b.Height = 100;
+//Настройка ширины изображения (в пикселях)
+b.Width = 200;
+//Генерация изображения
+kod_rondom += date_in_string;
+image = b.Encode(BarcodeLib.TYPE.CODE128C, kod_rondom);
+
+image.Save(@"C:\Users");
+
+
