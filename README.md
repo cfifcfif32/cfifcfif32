@@ -277,3 +277,24 @@ image = b.Encode(BarcodeLib.TYPE.CODE128C, kod_rondom);
 image.Save(@"C:\Users");
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+![IMG_6260](https://github.com/cfifcfif32/cfifcfif32/assets/173002505/0037aac3-4361-4967-912e-a0a184adee5e)
+
+
+
+
