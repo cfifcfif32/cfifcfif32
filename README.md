@@ -2,7 +2,7 @@ https://disk.yandex.ru/d/IX-eZQ8HUIZ84Q/Теория
 
 
 
-
+резерв ссылка https://disk.yandex.ru/d/n045AB_wl7-pCg/МДК%2001.01%20(ИС-21-3%2C3к).zip
 
 
 
