@@ -298,3 +298,144 @@ image.Save(@"C:\Users");
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using Word = Microsoft.Office.Interop.Word;
+
+namespace WpfApp2
+{
+    /// <summary>
+    /// Логика взаимодействия для MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+        booksEntities db = new booksEntities();
+        List<Книги_> bookss;
+        int selected = 0;
+        private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            BitmapImage bitimg = new BitmapImage();
+            string filename = System.IO.Path.GetFullPath(@"sourse");
+            filename = filename + "\\" + bookss[listView.SelectedIndex].Изображение + ".jpg";
+            bitimg.BeginInit();
+            bitimg.UriSource = new Uri(filename);
+            bitimg.EndInit();
+
+            textBox.Text = bookss[listView.SelectedIndex].Описание;
+            image.Source = bitimg;
+            selected = listView.SelectedIndex;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            bookss = db.Книги_.ToList();
+
+            for (int i = 0; i < bookss.Count; i ++)
+            {
+                WrapPanel wp = new WrapPanel();
+
+                Image img = new Image();
+                Label labelname = new Label();
+                BitmapImage bitimg = new BitmapImage();
+
+                wp.Height = 200;
+                wp.Width = 180;
+
+                labelname.Content = bookss[i].Название;
+
+                string filename = System.IO.Path.GetFullPath(@"sourse");
+                filename = filename + "\\" + bookss[i].Изображение + ".jpg";
+                bitimg.BeginInit();
+                bitimg.UriSource = new Uri(filename);
+                bitimg.EndInit();
+
+
+                img.Source = bitimg;
+
+                img.Width = 180;
+                img.Height = 160;
+
+                wp.Children.Add(img);
+                wp.Children.Add(labelname);
+
+                listView.Items.Add(wp);
+
+            }
+        }
+        private void Repwo(string subToReplace, string text, Word.Document worddoc)
+        {
+            var range = worddoc.Content;
+            range.Find.ClearFormatting();
+            range.Find.Execute(FindText: subToReplace, ReplaceWith: text);
+        }
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+             MessageBox.Show("начинаеца ворд");
+             var WordApp = new Word.Application();
+             WordApp.Visible = false;
+             //делаем диалог выбора папки, в которую будет сохранятся билет
+             var Worddoc = WordApp.Documents.Open(Environment.CurrentDirectory +
+             @"\check.docx");
+             Repwo("{number}", "1", Worddoc);
+             Repwo("{date}", DateTime.Now.ToString(), Worddoc);
+             Repwo("{count}", "13", Worddoc);
+
+
+
+
+             Repwo("{book}",bookss[listView.SelectedIndex].Автор, Worddoc);
+             Repwo("{final}", "214", Worddoc);
+             Worddoc.SaveAs2(Environment.CurrentDirectory + @"\билет новый.docx");
+             MessageBox.Show("Билет сохранен!");
+        }
+    }
+}
+
+
+
+
+
