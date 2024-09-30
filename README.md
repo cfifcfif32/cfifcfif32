@@ -464,6 +464,281 @@ text = "";
 } 
 ![image](https://github.com/user-attachments/assets/b531fae0-aac5-42ed-a839-ad0ea2156b29)
 
+List<книги_> lol = db.книги_.ToList();
+for (int i = 0; i < lol.Count; i++)
+{
+
+    //Создаем элемент плитки для отображения
+    WrapPanel wp = new WrapPanel();
+    System.Windows.Controls.Image ing = new System.Windows.Controls.Image();
+    Label labelName = new Label();
+    //Настройка плитки.
+
+    wp.Height = 300;
+    wp.Width = 200;
+
+    //Настройка Лейбла(Названия)
+
+    labelName.Content = lol[i].Название; // в List загружены данные о книгах. i - индекс элемента, 1 - индекс столбца
+
+    // Настройка Изображений.
+    // Путь, изображения должны лежать в папке проекта Source.
+
+    string savePath = System.IO.Path.GetFullPath(@"C:\Users\cfifc\source\repos\Bookkk\Bookkk\Source");
+    savePath = savePath + "\\" + lol[i].Изображение+".jpg"; //i - индекс элемента, 2 - индекс столбца с изобракением.
+    BitmapImage bitmap = new BitmapImage();
+    bitmap.BeginInit();
+    bitmap.UriSource = new Uri(savePath);
+    bitmap.EndInit();
+    ing.Source = bitmap;
+    // Программно добавляем сробытие для плитки.
+    ing.MouseDown += new MouseButtonEventHandler(list_MouseDown);
+    //Настройка размера изображения.
+
+    ing.Height = 250;
+    ing.Width = 200;
+    // Говорим изображению, чтобы в сасих данных хранил Id элемента, і - индекс элемекта, е - индекс столбца
+
+    ing.Uid = lol[i].id.ToString();
+
+    // Отправляем изображение и наименование в плитку(Дочерние в родительские).
+
+    wp.Children.Add(ing);
+    wp.Children.Add(labelName);
+    //Добавляем плитку в ListView.
+    list1.Items.Add(wp);
+}
+![image](https://github.com/user-attachments/assets/a69cda83-ae4d-4d2f-8d0d-5d1b016a4d92)
+
+            List<книги_> lol = db.книги_.ToList();
+            System.Windows.Point mousePosition = Mouse.GetPosition(this);
+
+            IInputElement element = InputHitTest(mousePosition);
+
+            string elementNeme = (element as FrameworkElement) ?. Uid;
+            int elementNeme1 = Convert.ToInt32(elementNeme) - 1;
+            string savePath = System.IO.Path.GetFullPath(@"C:\Users\cfifc\source\repos\Bookkk\Bookkk\Source");
+            savePath = savePath + "\\" + lol[elementNeme1].Изображение + ".jpg"; //i - индекс элемента, 2 - индекс столбца с изобракением.
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri(savePath);
+            bitmap.EndInit();
+            im.Source = bitmap;
+            lebel.Content = lol[elementNeme1].Название;
+![image](https://github.com/user-attachments/assets/e702ed2c-efaf-476a-a7bf-1a24baed5288)
+
+![image](https://github.com/user-attachments/assets/bec76961-bb13-4ba9-aa2c-87129208ebba)
+string search = box.Text;
+if (box.Text != "")
+{
+    list1.Items.Clear();
+    List<книги_> lol = db.книги_.ToList();
+    lol = lol.Where(x => x.Название.StartsWith(search)).ToList();
+    for (int i = 0; i < lol.Count; i++)
+    {
+
+        //Создаем элемент плитки для отображения
+        WrapPanel wp = new WrapPanel();
+        System.Windows.Controls.Image ing = new System.Windows.Controls.Image();
+        Label labelName = new Label();
+        //Настройка плитки.
+
+        wp.Height = 300;
+        wp.Width = 200;
+
+        //Настройка Лейбла(Названия)
+
+        labelName.Content = lol[i].Название; // в List загружены данные о книгах. i - индекс элемента, 1 - индекс столбца
+
+        // Настройка Изображений.
+        // Путь, изображения должны лежать в папке проекта Source.
+
+        string savePath = System.IO.Path.GetFullPath(@"C:\Users\cfifc\source\repos\Bookkk\Bookkk\Source");
+        savePath = savePath + "\\" + lol[i].Изображение + ".jpg"; //i - индекс элемента, 2 - индекс столбца с изобракением.
+        BitmapImage bitmap = new BitmapImage();
+        bitmap.BeginInit();
+        bitmap.UriSource = new Uri(savePath);
+        bitmap.EndInit();
+        ing.Source = bitmap;
+        // Программно добавляем сробытие для плитки.
+        ing.MouseDown += new MouseButtonEventHandler(list_MouseDown);
+        //Настройка размера изображения.
+
+        ing.Height = 250;
+        ing.Width = 200;
+        // Говорим изображению, чтобы в сасих данных хранил Id элемента, і - индекс элемекта, е - индекс столбца
+
+        ing.Uid = lol[i].id.ToString();
+
+        // Отправляем изображение и наименование в плитку(Дочерние в родительские).
+
+        wp.Children.Add(ing);
+        wp.Children.Add(labelName);
+        //Добавляем плитку в ListView.
+        list1.Items.Add(wp);
+
+    }
+
+
+}
+else
+{
+    list1.Items.Clear();
+    List<книги_> lol = db.книги_.ToList();
+
+    for (int i = 0; i < lol.Count; i++)
+    {
+
+        //Создаем элемент плитки для отображения
+        WrapPanel wp = new WrapPanel();
+        System.Windows.Controls.Image ing = new System.Windows.Controls.Image();
+        Label labelName = new Label();
+        //Настройка плитки.
+
+        wp.Height = 300;
+        wp.Width = 200;
+
+        //Настройка Лейбла(Названия)
+
+        labelName.Content = lol[i].Название; // в List загружены данные о книгах. i - индекс элемента, 1 - индекс столбца
+
+        // Настройка Изображений.
+        // Путь, изображения должны лежать в папке проекта Source.
+
+        string savePath = System.IO.Path.GetFullPath(@"C:\Users\cfifc\source\repos\Bookkk\Bookkk\Source");
+        savePath = savePath + "\\" + lol[i].Изображение + ".jpg"; //i - индекс элемента, 2 - индекс столбца с изобракением.
+        BitmapImage bitmap = new BitmapImage();
+        bitmap.BeginInit();
+        bitmap.UriSource = new Uri(savePath);
+        bitmap.EndInit();
+        ing.Source = bitmap;
+        // Программно добавляем сробытие для плитки.
+        ing.MouseDown += new MouseButtonEventHandler(list_MouseDown);
+        //Настройка размера изображения.
+
+        ing.Height = 250;
+        ing.Width = 200;
+        // Говорим изображению, чтобы в сасих данных хранил Id элемента, і - индекс элемекта, е - индекс столбца
+
+        ing.Uid = lol[i].id.ToString();
+
+        // Отправляем изображение и наименование в плитку(Дочерние в родительские).
+
+        wp.Children.Add(ing);
+        wp.Children.Add(labelName);
+        //Добавляем плитку в ListView.
+        list1.Items.Add(wp);
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+пример библотеки
+
+
+    public class Class1
+    {
+        public bool check_password(string password)
+        {
+            string pattern = @"^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,}$";
+
+            Regex regex = new Regex(pattern);
+
+            return regex.IsMatch(password);
+        }
+        public bool check_password1(string password1)
+        { 
+            
+            int indexOfChar = password1.IndexOf("!");
+            int indexOfChar1 = password1.IndexOf("*");
+            int indexOfChar2 = password1.IndexOf(" ");
+            int indexOfChar3 = password1.IndexOf(";");
+            if (indexOfChar != -1 && indexOfChar1 != -1 && indexOfChar2 == -1 && indexOfChar3 == -1)
+            {
+                if (password1.Length > 8)
+                {
+                    if (password1.Length < 25)
+                    {
+
+                        return true;
+
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
+
+
+        }
+
+    }
+}
+прмер работы
+
+
+using ClassLibrary1;
+
+
+Class1 a = new Class1();
+string login1 = Convert.ToString(login);
+string passvord1 = Convert.ToString(passvord.Text);
+if (login1 !="" && passvord1 !="")
+{
+
+    if (a.check_password1(passvord1))
+    {
+        MessageBox.Show("мы тут ");
+        Window1 aa = new Window1(bitmapImage);
+        aa.Show();
+        this.Close();
+    }
+
+    MessageBox.Show("ок");
+}
+else
+{
+
+}
+
+--------------------------------------------------------------------------------------------------------------
+Картинки 
+ Window1 aa = new Window1(bitmapImage);
+ aa.Show();
+ this.Close();
+на кнопку
+// Open a file dialog to select a photo
+OpenFileDialog openFileDialog = new OpenFileDialog();
+openFileDialog.Filter = "Image Files (*.jpg, *.jpeg, *.png, *.bmp)|*.jpg;*.jpeg;*.png;*.bmp";
+openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+
+if (openFileDialog.ShowDialog() == true)
+{
+    // Get the selected file path
+    string filePath = openFileDialog.FileName;
+
+    // Load the selected photo into the Image control
+    bitmapImage = new BitmapImage();
+    bitmapImage.BeginInit();
+    bitmapImage.UriSource = new Uri(filePath);
+    bitmapImage.EndInit();
+    a.Source = bitmapImage;
+}
+
+на 2 форме 
+f.Source = bitmapImage;
+
+
+
 
 
 
