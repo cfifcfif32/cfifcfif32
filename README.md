@@ -7,7 +7,7 @@ https://disk.yandex.ru/d/IX-eZQ8HUIZ84Q/Теория
 
 
 
-с бд
+с бдS
 var user = db.сотрудники.FirstOrDefault(x => x.login == Login && x.password == password);
 
 int type = (int)user.type;
@@ -218,7 +218,7 @@ private void Button_Click(object sender, RoutedEventArgs e)
 
 
 
-   капчя
+Капчя
 
 int attempt = 0;
 attempt++;
@@ -434,9 +434,19 @@ namespace WpfApp2
         }
     }
 }
+__________________________________________________________________________________________
+поиск в листе чериз текст бокс
 
-
-
+ string search = log.Text;
+ if (log.Text != "")
+ {
+     var foundUsers = users.Where(x => x.Логин.StartsWith(search)).ToList();
+     listUsers.ItemsSource = foundUsers;
+ }
+ else
+ {
+     listUsers.ItemsSource = users;
+ }
 
 
 
