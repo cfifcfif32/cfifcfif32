@@ -739,6 +739,17 @@ f.Source = bitmapImage;
 
 
 
+занасить даные из лебла
+int code;
+
+public Window3(int id)
+
+code = id;
+
+ var uesr = db.сотрудники.FirstOrDefault(x => x.id == code);
+ Name.Content = uesr.name;
+
+
 
 
 
