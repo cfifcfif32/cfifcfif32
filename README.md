@@ -1,18 +1,13 @@
--
--
--
--
--
--
--
--
--
--
--
--
--
--
--
+string amount = "100.50";
+Word.Application wordApp = new Word.Application();
+Word.Document wordDoc = wordApp.Documents.Open("C:\\Users\\pc\\source\\repos\\0202\\0202\\bin\\Debug" + "/obraz.docx");
+Word.Bookmark bookmark = wordDoc.Bookmarks["mark"];
+bookmark.Range.Text = amount;
+string fileName = "C:\\Users\\pc\\source\\repos\\0202\\0202\\bin\\Debug" + $"/Квитанция_{DateTime.Now:dd.MM.yyyy}.docx";
+wordDoc.SaveAs2(fileName);
+wordDoc.Close();
+wordApp.Quit();
+MessageBox.Show($"Квитанция сохранена как {fileName}");
 -
 -
 -
