@@ -1,3 +1,4 @@
+```csharp
 string amount = "100.50";
 Word.Application wordApp = new Word.Application();
 Word.Document wordDoc = wordApp.Documents.Open("C:\\Users\\pc\\source\\repos\\0202\\0202\\bin\\Debug" + "/obraz.docx");
@@ -8,6 +9,7 @@ wordDoc.SaveAs2(fileName);
 wordDoc.Close();
 wordApp.Quit();
 MessageBox.Show($"Квитанция сохранена как {fileName}");
+```
 -
 -
 -
