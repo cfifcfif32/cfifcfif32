@@ -1,4 +1,7 @@
 ```csharp
+using Word = Microsoft.Office.Interop.Word;
+
+
 string amount = "100.50";
 Word.Application wordApp = new Word.Application();
 Word.Document wordDoc = wordApp.Documents.Open("C:\\Users\\pc\\source\\repos\\0202\\0202\\bin\\Debug" + "/obraz.docx");
