@@ -2,7 +2,6 @@
 using Word = Microsoft.Office.Interop.Word;
 
 
-string amount = "100.50";
 Word.Application wordApp = new Word.Application();
 Word.Document wordDoc = wordApp.Documents.Open("C:\\Users\\pc\\source\\repos\\0202\\0202\\bin\\Debug" + "/obraz.docx");
 Word.Bookmark bookmark = wordDoc.Bookmarks["mark"];
@@ -12,6 +11,51 @@ wordDoc.SaveAs2(fileName);
 wordDoc.Close();
 wordApp.Quit();
 MessageBox.Show($"Квитанция сохранена как {fileName}");
+
+-
+_
+_
+_
+-
+if (Cnechbox4.IsChecked == true)
+{
+    Class1 class1 = new Class1();
+    summa += class1.MyMethod();
+    вывод_крадаша.Content = "Крандаши";
+}
+if (Cnechbox3.IsChecked == true)
+{
+    Class1 class1 = new Class1();
+    summa += class1.MyMethod1();
+    вывод_альбома.Content = "Альбом";
+}
+if (Cnechbox2.IsChecked == true)
+{
+    Class1 class1 = new Class1();
+    summa += class1.MyMethod2();
+    вывод_Ластика.Content = "Ластик ";
+}
+
+public int MyMethod()
+{
+    int a = 50;
+    return a;
+    
+}
+
+[TestMethod]
+public void TestMethod1()
+{
+    
+    decimal need = 50;
+    Class1 myClass = new Class1();
+    decimal output = myClass.MyMethod();
+    Assert.AreEqual(need, output);
+}
+
+
+
+
 ```
 -
 -
