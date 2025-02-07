@@ -1,3 +1,8 @@
+List<Производитель> str = db.Производитель.ToList();
+for (int i = 0; i < str.Count; i++)
+{
+    avtor.Items.Add(str[i].Наименование);
+}
 List<Заявки> zaiavki = db.Заявки.Where(x => x.тип == 1).ToList()
 ```csharp
 private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
