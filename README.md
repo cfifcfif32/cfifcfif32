@@ -1,3 +1,4 @@
+List<Заявки> zaiavki = db.Заявки.Where(x => x.тип == 1).ToList()
 ```csharp
 private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
 {
