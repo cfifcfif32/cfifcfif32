@@ -1,4 +1,66 @@
 ```csharp
+private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+{
+    list.Items.Clear();
+    List<Товар> listt = db.Товар.Where(x => x.Название_товара.StartsWith(text.Text)).ToList();
+    List<Производитель> xz = db.Производитель.ToList();
+    for (int i = 0; i < listt.Count; i++)
+    {
+        var kol = listt[i];
+        var zxzx = xz[i];
+        StackPanel sp = new StackPanel();
+        sp.Orientation = Orientation.Horizontal;
+
+        System.Windows.Controls.Image img = new System.Windows.Controls.Image();
+        string savePath = System.IO.Path.GetFullPath(@"..\..\..\Up_02\bin\Debug\images");
+        savePath = System.IO.Path.Combine(savePath, kol.Фото.TrimEnd());
+
+        BitmapImage bitmap = new BitmapImage();
+        bitmap.BeginInit();
+        bitmap.UriSource = new Uri(savePath);
+        bitmap.EndInit();
+        img.Source = bitmap;
+        img.Width = 100;
+        img.Height = 100;
+
+        // Создаем еще один StackPanel для вертикального расположения названия товара и наименования производителя
+        StackPanel textPanel = new StackPanel();
+        textPanel.Orientation = Orientation.Vertical;
+
+        TextBlock nazvanie = new TextBlock();
+        TextBlock cena = new TextBlock();
+        TextBlock opisnia = new TextBlock();
+        TextBlock kicstov = new TextBlock();
+
+        nazvanie.Margin = new Thickness(10, 5, 0, 0);
+        nazvanie.FontSize = 16;
+        cena.Margin = new Thickness(250, 5, 0, 5);
+        cena.FontSize = 16;
+        opisnia.Margin = new Thickness(15, 5, 0, 5);
+        opisnia.FontSize = 16;
+        kicstov.Margin = new Thickness(10, 5, 0, 5);
+        kicstov.FontSize = 16;
+
+        opisnia.Text = kol.Название_товара;
+        nazvanie.Text = zxzx.Наименование.TrimEnd();
+        cena.Text = $"{kol.Цена} ₽";
+
+        // Добавляем текстовые блоки в вертикальный StackPanel
+        textPanel.Children.Add(opisnia); // Название товара
+        textPanel.Children.Add(nazvanie); // Наименование производителя
+
+        // Добавляем изображение и текстовый StackPanel в основной StackPanel
+        sp.Children.Add(img);
+        sp.Children.Add(textPanel);
+        sp.Children.Add(cena); // Если нужно, добавьте количество товара
+
+        list.Items.Add(sp);
+
+    }
+}
+
+```
+```csharp
 List<Партнеры> f = db.Партнеры.ToList();
 List<Тип_партнера_ > a = db.Тип_партнера_.ToList();
 List<Продукция_партнеров> v = db.Продукция_партнеров.ToList();
