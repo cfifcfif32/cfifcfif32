@@ -1,9 +1,107 @@
+supabase
+```csharp
+using Supabase; // Не забудьте добавить ссылку на библиотеку Supabase
+using System;
+using System.IO;
+using System.Threading.Tasks;
+
+// Определяем модель для таблицы "cities"
+[Table("cities")]
+class City : BaseModel
+{
+    [PrimaryKey("id", false)]
+    public int Id { get; set; }
+    
+    [Column("name")]
+    public string Name { get; set; }
+    
+    [Column("country_id")]
+    public int CountryId { get; set; }
+}
+
+class Program
+{
+    private static Supabase.Client supabase;
+
+    static async Task Main(string[] args)
+    {
+        // Инициализация клиента Supabase
+        var url = Environment.GetEnvironmentVariable("SUPABASE_URL"); // URL вашего проекта Supabase
+        var key = Environment.GetEnvironmentVariable("SUPABASE_KEY"); // Публичный ключ вашего проекта Supabase
+        var options = new Supabase.SupabaseOptions { AutoConnectRealtime = true };
+        supabase = new Supabase.Client(url, key, options);
+        await supabase.InitializeAsync();
+
+        // Добавление записи в таблицу "cities"
+        var newCity = new City { Name = "The Shire", CountryId = 554 };
+        await supabase.From<City>().Insert(newCity);
+        Console.WriteLine("Запись добавлена: " + newCity.Name);
+
+        // Чтение всех записей из таблицы "cities"
+        var result = await supabase.From<City>().Get();
+        var cities = result.Models;
+        Console.WriteLine("Список городов:");
+        foreach (var city in cities)
+        {
+            Console.WriteLine($"- {city.Name} (ID: {city.Id})");
+        }
+
+        // Чтение записи с фильтром
+        var filteredResult = await supabase.From<City>()
+            .Where(x => x.Name == "Bali")
+            .Get();
+        Console.WriteLine("Города с именем 'Bali':");
+        foreach (var city in filteredResult.Models)
+        {
+            Console.WriteLine($"- {city.Name} (ID: {city.Id})");
+        }
+
+        // Обновление записи
+        var update = await supabase.From<City>()
+            .Where(x => x.Name == "Auckland")
+            .Set(x => x.Name, "Middle Earth")
+            .Update();
+        Console.WriteLine("Запись обновлена.");
+
+        // Удаление записи
+        await supabase.From<City>()
+            .Where(x => x.Id == 342) // Укажите ID записи, которую хотите удалить
+            .Delete();
+        Console.WriteLine("Запись удалена.");
+
+        // Работа с хранилищем
+        // Создание нового хранилища
+        var bucket = await supabase.Storage.CreateBucket("avatars");
+        Console.WriteLine("Создано хранилище: avatars");
+
+        // Загрузка файла в хранилище
+        var imagePath = Path.Combine("Assets", "fancy-avatar.png"); // Укажите путь к вашему файлу
+        await supabase.Storage.From("avatars")
+            .Upload(imagePath, "fancy-avatar.png", new FileOptions { CacheControl = "3600", Upsert = false });
+        Console.WriteLine("Файл загружен в хранилище.");
+
+        // Получение списка файлов в хранилище
+        var objects = await supabase.Storage.From("avatars").List();
+        Console.WriteLine("Список файлов в хранилище:");
+        foreach (var obj in objects)
+        {
+            Console.WriteLine($"- {obj.Name}");
+        }
+    }
+}
+
+```
+```csharp
 List<Производитель> str = db.Производитель.ToList();
 for (int i = 0; i < str.Count; i++)
 {
     avtor.Items.Add(str[i].Наименование);
 }
+
+
+
 List<Заявки> zaiavki = db.Заявки.Where(x => x.тип == 1).ToList()
+```
 ```csharp
 private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
 {
