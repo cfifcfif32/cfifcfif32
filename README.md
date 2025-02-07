@@ -1,4 +1,127 @@
 ```csharp
+List<Партнеры> f = db.Партнеры.ToList();
+List<Тип_партнера_ > a = db.Тип_партнера_.ToList();
+List<Продукция_партнеров> v = db.Продукция_партнеров.ToList();
+List<Продукция> z = db.Продукция.ToList();
+double sskida = 0;
+for (int i = 0; i < f.Count; i++)
+{
+    int last = 0;
+    int part = Convert.ToInt32( f[i].id);
+    int id2 = Convert.ToInt32( f[i].Тип_партнера);
+    string neme =f[i].Наименование_партнера;
+    WrapPanel wp = new WrapPanel();
+    wp.Width = 700;
+    if (db.Продукция_партнеров.FirstOrDefault(d => d.id_партнера == part) == null)
+    {
+    }
+    else
+    {
+        var prouk = db.Продукция_партнеров.FirstOrDefault(d => d.id_партнера == part).Продукция;
+        var skidk = Convert.ToInt32(db.Продукция_партнеров.FirstOrDefault(d => d.id_партнера == part).Количество_продукции);
+        var kol = Convert.ToInt32(db.Продукция.FirstOrDefault(d => d.id == prouk).Минимальная_стоимость);
+        last = kol * skidk;
+    }
+    string OAO = db.Тип_партнера_.FirstOrDefault(x => x.id == id2).Наименование;
+        int riting = Convert.ToInt32(f[i].Рейтинг);
+        string nomer = f[i].Телефон_партнера;
+        string nemee = f[i].Имя;
+        string famil = f[i].Фамилия;
+        string Otvstvo = f[i].Отчество;
+    
+    
+    
+    if (last > 300000)
+    {
+        sskida = 15;
+    }
+    else if (last > 50000)
+    {
+        sskida = 10;
+    }
+    else if (last > 10000)
+    {
+        sskida = 5;
+    }
+    else
+    {
+        sskida = 0;
+    }
+
+    TextBlock type = new TextBlock
+    {
+        Text =  OAO + " | " + neme,
+        FontSize = 16,
+        Margin = new Thickness(10, 0, 0, 0),
+        Width = wp.Width - 400
+    };
+
+    TextBlock discountTxt = new TextBlock
+    {
+        Text = sskida + "%",
+        FontSize = 16,
+        Margin = new Thickness(0, 0, 0, 0),
+        TextAlignment = TextAlignment.Right,
+        Width = wp.Width - 400,
+        HorizontalAlignment = HorizontalAlignment.Right
+    };
+
+    TextBlock role = new TextBlock
+    {
+        Text = "Директор " + nemee +" "+ famil + " " + Otvstvo,
+        FontSize = 12,
+        Margin = new Thickness(10, 0, 0, 0),
+        Width = wp.Width
+
+    };
+
+    TextBlock phone = new TextBlock
+    {
+        Text = "номер тилтфона: " + nomer,
+        FontSize = 12,
+        Margin = new Thickness(10, 0, 0, 0),
+    };
+
+    TextBlock rating = new TextBlock
+    {
+        Text = "Рейтинг: " + riting,
+        FontSize = 12,
+        Margin = new Thickness(10, 0, 0, 0),
+        Width = wp.Width
+    };
+
+    wp.Children.Add(type);
+    wp.Children.Add(discountTxt);
+    wp.Children.Add(role);
+    wp.Children.Add(phone);
+    wp.Children.Add(rating);
+
+    
+    PartnerList.Items.Add(wp);
+```
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+--
+-
+
+-
+```csharp
 using Word = Microsoft.Office.Interop.Word;
 
 
