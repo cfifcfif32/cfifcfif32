@@ -1,5 +1,58 @@
 supabase
 ```csharp
+
+public class aaaaa
+{
+    public string a {get ; set;}
+    public string d { get; set; }
+    public string c { get; set; }
+
+}
+orgtex2Entities db = new orgtex2Entities(); 
+public MainWindow()
+{
+    ObservableCollection<aaaaa> aaaaas = new ObservableCollection<aaaaa>();
+    List<Сотрудник> сотрудник = db.Сотрудник.ToList();
+    
+    InitializeComponent();
+    for (int i = 0; i < сотрудник.Count; i++)
+    {
+        aaaaas.Add(new aaaaa
+        {
+            a = сотрудник[i].id.ToString(),
+            d = сотрудник[i].Должность.должность1,
+            c = сотрудник[i].Имя,
+
+        });
+        myListView.ItemsSource = aaaaas;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+```csharp
 using Supabase; // Не забудьте добавить ссылку на библиотеку Supabase
 using System;
 using System.IO;
