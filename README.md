@@ -3,15 +3,16 @@ supabase
 
 public class aaaaa
 {
-    public string a {get ; set;}
-    public string d { get; set; }
-    public string c { get; set; }
+    public string id {get ; set;}
+    public string имя { get; set; }
+    public string фамлия  { get; set; }
 
 }
-orgtex2Entities db = new orgtex2Entities(); 
+orgtex2Entities db = new orgtex2Entities();
+List<aaaaa> aaaaas = new List<aaaaa>();
 public MainWindow()
 {
-    ObservableCollection<aaaaa> aaaaas = new ObservableCollection<aaaaa>();
+   
     List<Сотрудник> сотрудник = db.Сотрудник.ToList();
     
     InitializeComponent();
@@ -19,16 +20,32 @@ public MainWindow()
     {
         aaaaas.Add(new aaaaa
         {
-            a = сотрудник[i].id.ToString(),
-            d = сотрудник[i].Должность.должность1,
-            c = сотрудник[i].Имя,
+            id = сотрудник[i].id.ToString(),
+            имя = сотрудник[i].Должность.должность1,
+            фамлия = сотрудник[i].Имя,
 
         });
-        myListView.ItemsSource = aaaaas;
+        myListView1.ItemsSource = aaaaas;
     }
 }
 
 
+
+
+
+private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+{
+
+    List<Сотрудник> emp = new List<Сотрудник>();
+    var filteredEmp = aaaaas.AsQueryable();
+
+    
+        filteredEmp = filteredEmp.Where(x =>
+            ($"{x.id} {x.имя} {x.фамлия}").Contains(ddddd.Text));
+    
+    myListView1.ItemsSource = null;
+    myListView1.ItemsSource = filteredEmp;
+}
 
 
 
