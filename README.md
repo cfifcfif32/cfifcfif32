@@ -1,6 +1,69 @@
 supabase
 ```csharp
 
+
+hazis_mastr_polsEntities db = new hazis_mastr_polsEntities();
+public MainWindow()
+{
+    InitializeComponent();
+    List<Партнеры> a = db.Партнеры.ToList();
+    for (int i = 0; i < a.Count; i++)
+    {
+        list.Items.Add($"{a[i].Имя} {a[i].Фамилия}");
+    }
+    
+}
+private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+{
+    string searchText = textBox.Text;
+    var filteredEmployees = db.Партнеры.Where(x => (x.Имя + x.Фамилия).Contains(searchText)).ToList();
+    list.Items.Clear();
+    for (int i = 0; i < filteredEmployees.Count; i++)
+    {
+        list.Items.Add($"{filteredEmployees[i].Имя} {filteredEmployees[i].Фамилия}");
+    }
+
+}
+
+
+ float materialDamage = (float)db.Тип_материала.Where(x => x.id == combox.SelectedIndex+1).FirstOrDefault().Процент_брака;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+```csharp
+
 public class aaaaa
 {
     public string id {get ; set;}
