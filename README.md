@@ -24,7 +24,12 @@ private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
     }
 
 }
-
+List<Тип_материала> str = new List<Тип_материала>();
+str = db.Тип_материала.ToList();
+for (int i = 0; i < str.Count; i++)
+{
+    combox.Items.Add(str[i].Наименование);
+}
 
  float materialDamage = (float)db.Тип_материала.Where(x => x.id == combox.SelectedIndex+1).FirstOrDefault().Процент_брака;
 
