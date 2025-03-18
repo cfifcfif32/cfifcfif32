@@ -31,8 +31,7 @@ for (int i = 0; i < str.Count; i++)
     combox.Items.Add(str[i].Наименование);
 }
 
- float materialDamage = (float)db.Тип_материала.Where(x => x.id == combox.SelectedIndex+1).FirstOrDefault().Процент_брака;
-
+ float materialDamage = (float)db.Тип_материала.FirstOrDefault(x => x.id == combox.SelectedIndex + 1).Процент_брака;
 
 
 
