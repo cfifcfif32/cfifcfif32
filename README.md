@@ -1,4 +1,77 @@
 supabase
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```csharp
+hazis_mastr_polsEntities db = new hazis_mastr_polsEntities ();  
+
+public MainWindow()
+{
+    InitializeComponent();
+    List<Партнеры> f = db.Партнеры.ToList();
+    for (int i = 0; i < f.Count; i++)
+    {
+        list.Items.Add($"{f[i].Тип_партнера_.Наименование} {f[i].Имя}");
+    }
+    List<Тип_партнера_> а = db.Тип_партнера_.ToList();
+    combx.Items.Add("Все");
+    combx.SelectedIndex = 0;
+    for (int i = 0; i < а.Count; i++)
+    {
+        combx.Items.Add($"{а[i].Наименование}");
+    }
+}
+
+private void combx_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+{
+    List<Партнеры> fd = new List<Партнеры>();
+    if (combx.SelectedIndex == 0)
+    {
+        fd = db.Партнеры.ToList();
+    }
+    else 
+    {
+        fd = db.Партнеры.Where(x=> x.Тип_партнера == combx.SelectedIndex).ToList();
+    }
+    list.Items.Clear();
+    for (int i = 0; i < fd.Count; i++)
+    {
+        list.Items.Add($"{fd[i].Тип_партнера_.Наименование} {fd[i].Имя}");
+    }
+}
+
+private void Button_Click(object sender, RoutedEventArgs e)
+{
+    Window1 window1 = new Window1();
+    window1.Show();
+    this.Close();
+}
+```
+
+
+
+
+
+
+\
+
+
 ```csharp
 
 
