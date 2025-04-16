@@ -19,6 +19,34 @@ supabase
 
 
 ```csharp
+ TextBlock Ckidka = new TextBlock
+ {
+     Text = Convert.ToString( skidka),
+     FontSize = 12,
+     Margin = new Thickness(10, 0, 0, 0),
+     TextAlignment = TextAlignment.Right,
+     Width = wp.Width-400,
+     HorizontalAlignment = HorizontalAlignment.Right
+
+ };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 hazis_mastr_polsEntities db = new hazis_mastr_polsEntities ();  
 
 public MainWindow()
