@@ -2,7 +2,41 @@ supabase
 
 
 
+```csharp
+public class ff
+{
+    public DateTime Дата { get; set; }
+    public DateTime Время { get; set; }
+    public string Тип_мероприятия { get; set; }
+    public string  опесание { get; set; }
+}
+    
+List<ff> ffs = new List<ff>();
+Entities db = new Entities();
+public MainWindow()
+{
+    InitializeComponent();
 
+    List<Мероприятия_> a = db.Мероприятия_.ToList();
+
+    for (int i = 0; i < a.Count; i++) 
+    {
+        ffs.Add(new ff {
+            Дата =(DateTime)a[i].Дата,
+            Время = (DateTime)a[i].Время,
+            Тип_мероприятия = a[i].Тип_мероприятия_.Тип_мероприятия,
+            опесание =a[i].Описание,
+
+
+        });
+        grid.ItemsSource = ffs;
+
+
+
+    }
+}
+
+```
 
 
 
