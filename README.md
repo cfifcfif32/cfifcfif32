@@ -1,12 +1,12 @@
 supabase
 
-
+```
 DELETE FROM Тип_продукта
 WHERE 
     Код IS NULL AND
     Тип_продукции IS NULL AND
     Коэффициент_типа_продукции IS NULL
-
+```
 
 
 
