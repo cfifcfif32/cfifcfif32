@@ -19,6 +19,89 @@ private int getCount(int idTypeProd, int idTypeMat, decimal width, decimal heigh
     return finalcount;
 }
 
+```
+public void g()
+{
+    List<Партнёр> Parnist = db.Партнёр.ToList();
+    
+    for (int i = 0; i < Parnist.Count; i++)
+    {
+        decimal summ = 0;
+        int id = Parnist[i].Код;
+        List<Продукт_партнёров> Prdukt = db.Продукт_партнёров.Where(x=> x.Партнёр == id).ToList();
+        for (int f = 0;f < Prdukt.Count; f++ )
+        {
+            summ += (int)Prdukt[f].Количество_продукции * (decimal)Prdukt[f].Продукт.Минимальная_стоимость_для_партнера;
+        }
+        int skidon = 0;
+        if (summ < 10000)
+        {
+            skidon = 0;
+        }
+        if (summ > 10000) 
+        {
+            skidon = 5;
+        }
+        if (summ > 50000)
+        {
+            skidon = 10;
+        }
+        if (summ > 300000)
+        {
+            skidon = 15;
+        }
+        WrapPanel wp = new WrapPanel();
+        wp.Width = 700;
+        TextBlock oao = new TextBlock
+        {
+            Text = Parnist[i].Тип_партнёра.Тип_партнера +  " | " + Parnist[i].Наименование_партнера,
+            Margin = new Thickness(0, 0, 0, 0),
+            FontSize = 16,
+            Width = wp.Width - 400,
+        };
+        TextBlock skidka = new TextBlock
+        {
+            Text = skidon +"",
+            Margin = new Thickness(0, 0, 0, 0),
+            FontSize = 16,
+            Width = wp.Width - 400,
+            TextAlignment = TextAlignment.Right,
+            HorizontalAlignment = HorizontalAlignment.Right,
+        };
+        TextBlock fio_derktor = new TextBlock
+        {
+            Text = "Деректор: "+ Parnist[i].Директор,
+            Margin = new Thickness(0, 0, 0, 0),
+            FontSize = 12,
+            Width = wp.Width,
+        };
+
+        TextBlock Nomer = new TextBlock
+        {
+            Text = Parnist[i].Телефон_партнера,
+            Margin = new Thickness(0, 0, 0, 0),
+            FontSize = 12,
+            Width = wp.Width,
+            
+        };
+
+        TextBlock riting = new TextBlock
+        {
+            Text = "Рейтинг "+ Parnist[i].Рейтинг,
+            Margin = new Thickness(0, 0, 0, 0),
+            FontSize = 12,
+            Width = wp.Width,
+            
+        };
+        wp.Children.Add(oao);
+        wp.Children.Add(skidka);
+        wp.Children.Add(fio_derktor);
+        wp.Children.Add(Nomer);
+        wp.Children.Add(riting);
+        lsit.Items.Add(wp);
+    }
+}
+```
 
 ```
 ```
