@@ -1,5 +1,26 @@
 supabase
 
+
+```
+private int getCount(int idTypeProd, int idTypeMat, decimal width, decimal height, int count)
+{
+    int finalcount = 0;
+
+    decimal prodCoef = (decimal)db.Тип_продукта.FirstOrDefault(x => x.Код == idTypeProd).Коэффициент_типа_продукции;
+    decimal matProcent = (decimal)db.Тип_материала.FirstOrDefault(x => x.Код == idTypeMat).Процент_брака_материала;
+
+    decimal allParam = (decimal)(width * height * count * prodCoef);
+
+    decimal brak = (allParam * matProcent) / 100;
+
+    finalcount = (int)Math.Ceiling(allParam + brak);
+
+
+    return finalcount;
+}
+
+
+```
 ```
 DELETE FROM Тип_продукта
 WHERE 
