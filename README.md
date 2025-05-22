@@ -102,7 +102,30 @@ public void g()
     }
 }
 ```
-
+ demo_eck_finalEntities1 db = new demo_eck_finalEntities1();
+ public class  gridvivod
+ {
+     public string продукции { get; set; }
+     public int количества { get; set; }
+     public DateTime  даты__продажи { get; set; }
+ }
+ int id = 0;
+ List<gridvivod> gridvivods = new List<gridvivod>();
+ public histori(int id)
+ {
+     InitializeComponent();
+     this.id = id;
+     List<Продукт_партнёров> gg = db.Продукт_партнёров.Where(x => x.Партнёр == id).ToList();
+     for (int i = 0; i < gg.Count; i++) {
+         gridvivods.Add(new gridvivod
+         {
+             продукции = gg[i].Продукт.Наименование_продукции,
+             количества = (int)gg[i].Количество_продукции,
+             даты__продажи = (DateTime)gg[i].Дата_продажи
+         });
+         grid.ItemsSource = gridvivods;
+     }
+ }
 ```
 ```
 DELETE FROM Тип_продукта
